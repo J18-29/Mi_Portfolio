@@ -13,8 +13,13 @@ import { Productos } from '@/pages/Productos';
 import { ProductoDetalle } from '@/pages/ProductoDetalle';
 import { Cursos } from '@/pages/cursos/Cursos';
 import { Contacto } from '@/pages/Contacto';
+
+// ADMIN PAGES (Aquí usamos tus archivos nuevos)
 import { Admin } from '@/pages/admin/Admin';
-import { AdminCursos } from '@/pages/admin/AdminCursos';
+import AdminCursos from '@/pages/admin/AdminCursos';
+import AdminTrabajos from '@/pages/admin/AdminTrabajos';
+import AdminServicios from '@/pages/admin/AdminServicios';
+import AdminProductos from '@/pages/admin/AdminProductos';
 
 export const AppRouter = () => {
     return (
@@ -23,32 +28,24 @@ export const AppRouter = () => {
                 {/* GRUPO 1: WEB PÚBLICA */}
                 <Route element={<MainLayout />}>
                     <Route path="/" element={<Home />} />
-                    /* DENTRO DEL GRUPO 1: WEB PÚBLICA */
                    <Route path="/trabajos" element={<Trabajos />} />
                    <Route path="/trabajos/:id" element={<TrabajoDetalle />} />
-                   /* DENTRO DEL GRUPO 1: WEB PÚBLICA */
                    <Route path="/servicios" element={<Servicios />} />
                    <Route path="/servicios/:id" element={<ServicioDetalle />} />
                     <Route path="/productos" element={<Productos />} />
-                    
-                    {/* RUTA DINÁMICA: No afecta a las demás páginas */}
                     <Route path="/productos/:id" element={<ProductoDetalle />} />
-                    
                     <Route path="/cursos" element={<Cursos />} />
                     <Route path="/contacto" element={<Contacto />} />
                 </Route>
 
-              {/* GRUPO 2: PANEL ADMIN */}
+              {/* GRUPO 2: PANEL ADMIN (Dentro de /admin/...) */}
                <Route path="/admin" element={<BackLayout />}>
-                <Route index element={<Admin />} /> 
-               <Route path="productos" element={<div>Admin Productos</div>} />
-    
-              {/* AQUÍ ESTÁ EL CAMBIO CLAVE: */}
-             <Route path="cursos" element={<AdminCursos />} /> 
-    
-             <Route path="servicios" element={<div>Admin Servicios</div>} />
-             <Route path="trabajos" element={<div>Admin Trabajos</div>} />
-             </Route>
+                    <Route index element={<Admin />} /> 
+                    <Route path="productos" element={<AdminProductos />} />
+                    <Route path="cursos" element={<AdminCursos />} /> 
+                    <Route path="servicios" element={<AdminServicios />} />
+                    <Route path="trabajos" element={<AdminTrabajos />} />
+               </Route>
 
                 {/* GRUPO 3: AUTH */}
                 <Route path="/auth" element={<AuthLayout />}>
